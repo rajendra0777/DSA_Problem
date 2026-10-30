@@ -1,0 +1,73 @@
+/*
+Given a binary matrix maze[][] of size n × n containing values 0 and 1, find all possible paths for a rat to travel from the source cell (0, 0) to the destination cell (n - 1, n - 1). The rat can move in four directions: up(U), down(D), left(L), and right(R).
+
+1 represents an open cell through which the rat can move.
+0 represents a blocked cell that cannot be traversed.
+The rat can move only through open cells and cannot visit the same cell more than once in a path. Return all valid paths as strings consisting of 'U', 'D', 'L', and 'R', representing the sequence of moves taken by the rat.
+
+Note: Return the paths in lexicographically increasing order. If no valid path exists, return an empty list.
+Link:  https://www.geeksforgeeks.org/problems/rat-in-a-maze-problem/1
+
+Examples:
+
+Input: maze[][] = {{1, 0, 0, 0}, {1, 1, 0, 1}, {1, 1, 0, 0}, {0, 1, 1, 1}}
+Output: ["DDRDRR", "DRDDRR"]
+Explanation: There are two valid paths from the source cell (0, 0) to the destination cell (3, 3).
+
+Solution
+*/
+
+class Solution {
+	public ArrayList<String> ratInMaze(int[][] maze) {
+		// code here
+		
+		List<List<Integer>> mat = Arrays.stream(maze)
+                                        .map(row -> Arrays.stream(row).boxed().toList())
+                                        .toList(); // java 16
+		
+		ArrayList<String> ans = new ArrayList<>();
+		
+		int totalRow = mat.size();
+		int totalCol = mat.get(0).size();
+		
+		boolean [][] visited = new boolean[totalRow][totalCol]; // default - false
+		
+		// Valid source and target
+		if (mat.get(0).get(0) == 0 || mat.get(totalRow - 1).get(totalCol - 1) == 0)
+		return ans;
+		
+		visited[0][0] = true;
+		
+		solve(mat, 0, 0, visited, ans, "", totalRow, totalCol);
+		return ans;
+	}
+	
+	private void solve(List<List<Integer>> arr, int row, int col, boolean [][] visited,
+	List<String> ans, String path, int n, int m) {
+		
+		// base case
+		if (row == n - 1 && col == m - 1) {
+			ans.add(path);
+			return;
+		}
+		
+		// task
+		int [] delRow = {1, 0, 0, -1};
+		int [] delCol = {0, -1, 1, 0};
+		String move = "DLRU";
+		
+		for (int index = 0; index <= 3; index++) {
+			int newRow = row + delRow[index];
+			int newCol = col + delCol[index];
+			
+			if (newRow >= 0 && newRow<n &&
+			newCol >= 0 && newCol<m && !visited[newRow][newCol] && arr.get(newRow).get(newCol) == 1) {
+				
+				visited[newRow][newCol] = true;
+				solve(arr, newRow, newCol, visited, ans, path + move.charAt(index), n, m);
+				visited[newRow][newCol] = false;
+			}
+		}
+		
+	}
+}
