@@ -1,0 +1,27 @@
+/*
+Approach: Staircase Search using Recursion
+TC: O(m+n)
+SC: O(m+n)
+Link: https://leetcode.com/problems/search-a-2d-matrix/submissions/
+*/
+
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        // point index to the First row's last col
+        boolean res = solve(matrix, target, 0, matrix[0].length - 1);
+        return res;
+    }
+
+    private boolean solve(int[][] mat, int target, int row, int col) {
+        if (row < 0 || row >= mat.length || col < 0 || col >= mat[0].length)
+            return false;
+
+        if (mat[row][col] == target)
+            return true;
+
+        if (mat[row][col] > target)
+            return solve(mat, target, row, col - 1);
+
+        return solve(mat, target, row + 1, col);
+    }
+}
