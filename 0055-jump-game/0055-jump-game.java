@@ -7,9 +7,6 @@
 
 class Solution {
     public boolean canJump(int[] nums) {
-        if (nums.length == 1) {
-            return true;
-        }
 
         int maxJump = 0;
         for (int index = 0; index < nums.length; index++) {
