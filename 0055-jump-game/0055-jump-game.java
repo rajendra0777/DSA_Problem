@@ -16,10 +16,6 @@ class Solution {
             }
 
             maxJump = Math.max(maxJump, index + nums[index]);
-
-            if (maxJump > nums.length) {
-                return true;
-            }
         }
         return true;
     }
