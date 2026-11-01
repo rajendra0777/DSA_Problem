@@ -23,10 +23,6 @@ class Solution {
             if (maxJump > nums.length) {
                 return true;
             }
-
-            if(nums[index] == 0 && maxJump < index){
-                return false;
-            }
         }
         return true;
     }
