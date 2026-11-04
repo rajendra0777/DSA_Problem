@@ -1,3 +1,10 @@
+/*
+Approach: Gtreedy with 2 Pointer
+TC: O(N)
+SC: O(1)
+
+*/
+
 class Solution {
     public int findContentChildren(int[] g, int[] s) {
         if (g.length == 0 || s.length == 0)
@@ -20,6 +27,7 @@ class Solution {
 }
 
 /*
-g = 10,9,8,7
+There are absolutely no restrictions on the original sequence or positions of the children or cookies.
+g = 7,8,9,10    
 s = 5,6,7,8
 */
