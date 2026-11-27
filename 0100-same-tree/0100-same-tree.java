@@ -12,8 +12,6 @@
  *         this.right = right;
  *     }
  * }
- TC:O(N)
- SC: O(Height fo the tree)
  */
 class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
@@ -21,9 +19,7 @@ class Solution {
             return true;
 
         if ((p != null && q != null) && (p.val == q.val)) {
-
-            return isSameTree(p.left, q.left) &&
-                    isSameTree(p.right, q.right);
+            return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
         }
 
         return false;
